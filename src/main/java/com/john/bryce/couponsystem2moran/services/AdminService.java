@@ -84,7 +84,7 @@ public class AdminService extends ClientService {
     public void addCustomer(UUID token, Customer customer) throws CouponSystemException {
         tokenManager.validateToken(token, ClientType.ADMIN);
         if (customerRepo.existsByEmail(customer.getEmail())) {
-            throw new CouponSystemException("Customer email already exsist");
+            throw new CouponSystemException("Customer email already exist");
         }
         customerRepo.save(customer);
     }
@@ -96,7 +96,7 @@ public class AdminService extends ClientService {
         Customer customerFromDb = customerRepo.findById(customer.getId()).orElseThrow(() -> new CouponSystemException("Customer not found"));
         if (!customerFromDb.getEmail().equalsIgnoreCase(customer.getEmail())) {
             if(customerRepo.existsByEmailAndIdNot(customer.getEmail(), customer.getId())) {
-                throw new CouponSystemException("Email already exsists");
+                throw new CouponSystemException("Email already exists");
             }
         }
         customerFromDb.setFirstName(customer.getFirstName());
@@ -125,7 +125,7 @@ public class AdminService extends ClientService {
 
     public Customer getOneCustomer(UUID token, long customerId) throws CouponSystemException {
         tokenManager.validateToken(token, ClientType.ADMIN);
-        return customerRepo.findById(customerId).orElseThrow(() -> new CouponSystemException("Customer does not exsist"));
+        return customerRepo.findById(customerId).orElseThrow(() -> new CouponSystemException("Customer does not exist"));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.john.bryce.couponsystem2moran.controllers;
 
 import com.john.bryce.couponsystem2moran.entities.Category;
+import com.john.bryce.couponsystem2moran.entities.Company;
 import com.john.bryce.couponsystem2moran.entities.Coupon;
 import com.john.bryce.couponsystem2moran.exceptions.CouponSystemException;
 import com.john.bryce.couponsystem2moran.services.AdminService;
@@ -18,7 +19,7 @@ import java.util.UUID;
 public class CompanyController {
     private final CompanyService companyService;
 
-//    Post/ Delte/Put Get
+//    Post/ Delete/ Put/ Get
 
     @PostMapping("/coupon")
     @ResponseStatus(HttpStatus.CREATED)
@@ -32,12 +33,36 @@ public class CompanyController {
         companyService.updateCoupon(token, coupon);
     }
 
+    @DeleteMapping("/coupon/{couponId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCoupon(@RequestHeader("Authorization") UUID token,@PathVariable long couponID) throws CouponSystemException {
+        companyService.deleteCoupon(token, couponID);
+    }
+    @GetMapping("/coupons")
+    @ResponseStatus(HttpStatus.OK) // 200
+    public List<Coupon> getCompanyCoupons(@RequestHeader("Authorization") UUID token) throws CouponSystemException {
+        return companyService.getCompanyCoupons(token);
+    }
+
+
     @GetMapping("/coupons-category")
+    @ResponseStatus(HttpStatus.OK) // 200
     public List<Coupon> getCompanyCoupons(@RequestHeader("Authorization") UUID token, @RequestParam Category category) throws CouponSystemException {
-        return getCompanyCoupons(token,category);
+        return companyService.getCompanyCoupons(token,category);
+    }
+
+
+    @GetMapping("/coupons-by-max-price")
+    @ResponseStatus(HttpStatus.OK) // 200
+    public List<Coupon> getCompanyCoupons(@RequestHeader("Authorization") UUID token, @RequestParam double maxPrice) throws CouponSystemException {
+        return companyService.getCompanyCoupons(token,maxPrice);
+    }
+    @GetMapping("/customer-details")
+    @ResponseStatus(HttpStatus.OK) // 200
+    public Company getCompanyDetails(@RequestHeader("Authorization") UUID token) throws CouponSystemException {
+        return companyService.getCompanyDetails(token);
     }
 
 
 
-
-    }
+}
