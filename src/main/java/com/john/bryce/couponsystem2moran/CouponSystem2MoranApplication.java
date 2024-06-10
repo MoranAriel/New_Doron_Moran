@@ -7,7 +7,9 @@ import com.john.bryce.couponsystem2moran.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -22,5 +24,11 @@ public class CouponSystem2MoranApplication {
 
 
 	}
+
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
+
 
 }

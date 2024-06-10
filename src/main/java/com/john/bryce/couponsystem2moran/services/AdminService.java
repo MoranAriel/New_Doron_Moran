@@ -65,8 +65,9 @@ public class AdminService extends ClientService {
         if (!companyRepo.existsById(companyId)) {
             throw new CouponSystemException("Company does not exist");
         }
-            couponRepo.deletePurchasedCoupons(companyId);
-        couponRepo.deleteByCompanyId(companyId);
+
+        couponRepo.deletePurchasedCoupons(companyId);
+        companyRepo.deleteById(companyId);
     }
 
     public List<Company> getAllCompanies(UUID token) throws CouponSystemException {
