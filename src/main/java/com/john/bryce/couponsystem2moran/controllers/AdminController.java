@@ -90,7 +90,7 @@ Rest Controller aka controller made with rest architecture that is a standard wh
 
     @DeleteMapping("/customer/{customerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCustomer(@RequestHeader("Authorization") UUID token,@RequestBody long customerId) throws CouponSystemException {
+    public void deleteCustomer(@RequestHeader("Authorization") UUID token,@PathVariable long customerId) throws CouponSystemException {
         adminService.deleteCustomer(token, customerId);
     }
 
@@ -102,7 +102,7 @@ Rest Controller aka controller made with rest architecture that is a standard wh
 
     @GetMapping("/customer/{customerId}")
     @ResponseStatus(HttpStatus.OK)
-    public Customer getOneCustomer(@RequestHeader("Authorization") UUID token, @RequestBody long customerId) throws CouponSystemException {
+    public Customer getOneCustomer(@RequestHeader("Authorization") UUID token, @PathVariable long customerId) throws CouponSystemException {
         return adminService.getOneCustomer(token, customerId);
     }
 

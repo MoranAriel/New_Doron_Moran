@@ -21,9 +21,9 @@ public class CustomerService extends ClientService{
     @Override
     public LoginResponse login(String email, String password) throws CouponSystemException {
         Customer customerFromDb = customerRepo.findByEmailAndPassword(email, password).orElseThrow(() -> new CouponSystemException("Email or password is wrong"));
-        TokenInformation tokenInformation = new TokenInformation(customerFromDb.getId(), email, LocalDateTime.now().plusDays(1), ClientType.COMPANY);
+        TokenInformation tokenInformation = new TokenInformation(customerFromDb.getId(), email, LocalDateTime.now().plusDays(1), ClientType.CUSTOMER);
         UUID token = tokenManager.addToken(tokenInformation);
-        return new LoginResponse(token, customerFromDb.getId(),  email, customerFromDb.getFirstName(), ClientType.COMPANY);
+        return new LoginResponse(token, customerFromDb.getId(),  email, customerFromDb.getFirstName(), ClientType.CUSTOMER);
     }
 
     @Transactional

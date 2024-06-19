@@ -103,7 +103,7 @@ public class AdminService extends ClientService {
         customerFromDb.setFirstName(customer.getFirstName());
         customerFromDb.setLastName(customer.getLastName());
         customerFromDb.setEmail(customer.getEmail());
-        customerFromDb.setEmail(customer.getPassword());
+        customerFromDb.setPassword(customer.getPassword());
         customerRepo.save(customerFromDb);
     }
 

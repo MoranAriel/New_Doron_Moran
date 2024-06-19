@@ -32,8 +32,8 @@ public interface CouponRepo extends JpaRepository<Coupon, Long> {
     @Query(value = "INSERT INTO `customer_coupons` VALUES (?, ?)", nativeQuery = true)
     void purchaseCoupon(long customerId, long couponId);
 
-    @Query(value = "SELECT EXISTS (SELECT * FROM `customer_coupons WHERE customer_id = ? AND coupons_id = ? ) AS res;)", nativeQuery = true)
-    int isCouponPurchasedBefore(long customerId, long couponId);
+    @Query(value = "SELECT EXISTS (SELECT * FROM customer_coupons WHERE customer_id = ? AND coupons_id = ? ) AS res;", nativeQuery = true)
+    int isCouponPurchasedBefore(long customer_id, long coupons_id);
 
 
     @Query(value = "select * from `coupon` join `customer_coupons` on coupon.id = customer_coupons.coupons_id where customer_id = ?", nativeQuery = true)

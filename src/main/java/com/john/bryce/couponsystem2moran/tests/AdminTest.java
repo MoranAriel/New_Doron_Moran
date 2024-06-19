@@ -1,6 +1,7 @@
 package com.john.bryce.couponsystem2moran.tests;
 
 import com.john.bryce.couponsystem2moran.entities.Company;
+import com.john.bryce.couponsystem2moran.entities.Customer;
 import com.john.bryce.couponsystem2moran.exceptions.CouponSystemException;
 import com.john.bryce.couponsystem2moran.security.ClientType;
 import com.john.bryce.couponsystem2moran.security.LoginRequest;
@@ -35,12 +36,20 @@ public class AdminTest implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        System.out.println("ADMIN TEST");
+        System.out.println("---company---");
         loginTest();
         addCompanyTest();
         updateCompanyTest();
         deleteCompanyTest();
         getCompaniesTest();
         getCompanyTest();
+        System.out.println("---customers---");
+        addCustomerTest();
+        updateCustomerTest();
+        deleteCustomerTest();
+        getCustomersTest();
+        getCustomerTest();
     }
 
     public void loginTest(){
@@ -106,10 +115,8 @@ public class AdminTest implements CommandLineRunner {
 //        To get token
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", token.toString());
-
 //
         HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
-
 
         ResponseEntity<List<Company>> responseEntity  = restTemplate.exchange(url + "companies", HttpMethod.GET, httpEntity, new ParameterizedTypeReference<List<Company>>() {});
         System.out.println("Get Companies Test:");
@@ -127,6 +134,81 @@ public class AdminTest implements CommandLineRunner {
 
         ResponseEntity<Company> responseEntity  = restTemplate.exchange(url + "company/1", HttpMethod.GET, httpEntity, Company.class );
         System.out.println("Get Company Test:");
+        System.out.println(responseEntity.getBody());
+    }
+
+    public void addCustomerTest() throws CouponSystemException {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", token.toString());
+
+
+        Customer customer = new Customer(0, "Moran", "Ariel", "moran@gmail.com", "1234", null);
+        HttpEntity<Customer> httpEntity = new HttpEntity<>(customer, httpHeaders);
+
+
+        ResponseEntity<Void> responseEntity  = restTemplate.exchange(url + "customer", HttpMethod.POST, httpEntity, Void.class);
+        System.out.println("Add Customer Test:");
+        System.out.println(responseEntity.getStatusCode());
+
+        Customer customer2 = new Customer(0, "Doron", "Berger", "doron@gmail.com", "1234", null);
+        HttpEntity<Customer> httpEntity2 = new HttpEntity<>(customer2, httpHeaders);
+        ResponseEntity<Void> responseEntity2  = restTemplate.exchange(url + "customer", HttpMethod.POST, httpEntity2, Void.class);
+        System.out.println("Add Customer 2 Test:");
+        System.out.println(responseEntity2.getStatusCode());
+    }
+
+    public void updateCustomerTest() throws CouponSystemException {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", token.toString());
+
+
+        Customer customer = new Customer(1, "Moran", "Ariel Kuzi", "moran@gmail.com", "12345", null);
+        HttpEntity<Customer> httpEntity = new HttpEntity<>(customer, httpHeaders);
+
+
+        ResponseEntity<Void> responseEntity  = restTemplate.exchange(url + "customer", HttpMethod.PUT, httpEntity, Void.class);
+        System.out.println("Update Company Test:");
+        System.out.println(responseEntity.getStatusCode());
+    }
+    public void deleteCustomerTest() throws CouponSystemException {
+//        To get token
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", token.toString());
+
+//
+        HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
+
+
+        ResponseEntity<Void> responseEntity  = restTemplate.exchange(url + "customer/2", HttpMethod.DELETE, httpEntity, Void.class);
+        System.out.println("Delete Customer Test:");
+        System.out.println(responseEntity.getStatusCode());
+    }
+
+    public void getCustomersTest() throws CouponSystemException {
+//        To get token
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", token.toString());
+
+//
+        HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
+
+
+        ResponseEntity<List<Customer>> responseEntity  = restTemplate.exchange(url + "customers", HttpMethod.GET, httpEntity, new ParameterizedTypeReference<List<Customer>>() {});
+        System.out.println("Get Customers Test:");
+        System.out.println(responseEntity.getBody());
+    }
+
+    public void getCustomerTest() throws CouponSystemException {
+//        To get token
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", token.toString());
+
+        /// Body (Optional) + Token
+        HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
+
+
+        ResponseEntity<Customer> responseEntity  = restTemplate.exchange(url + "customer/1", HttpMethod.GET, httpEntity, Customer.class );
+        System.out.println("Get Customer Test:");
         System.out.println(responseEntity.getBody());
     }
 
