@@ -35,8 +35,8 @@ public class CompanyController {
 
     @DeleteMapping("/coupon/{couponId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCoupon(@RequestHeader("Authorization") UUID token,@PathVariable long couponID) throws CouponSystemException {
-        companyService.deleteCoupon(token, couponID);
+    public void deleteCoupon(@RequestHeader("Authorization") UUID token,@PathVariable long couponId) throws CouponSystemException {
+        companyService.deleteCoupon(token, couponId);
     }
     @GetMapping("/coupons")
     @ResponseStatus(HttpStatus.OK) // 200

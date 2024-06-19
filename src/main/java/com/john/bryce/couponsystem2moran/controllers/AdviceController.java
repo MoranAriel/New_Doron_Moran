@@ -16,7 +16,9 @@ public class AdviceController {
 
     @ExceptionHandler(value = { Exception.class })
     public ProblemDetail generalHandlerError(Exception e) {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "something went wrong please try again latter :(");
+//        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "something went wrong please try again later :(");
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
+
     }
 
 }

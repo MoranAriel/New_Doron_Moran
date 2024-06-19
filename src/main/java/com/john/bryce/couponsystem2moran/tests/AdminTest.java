@@ -58,7 +58,7 @@ public class AdminTest implements CommandLineRunner {
         httpHeaders.add("Authorization", token.toString());
 
 
-        Company company = new Company(0, "Aliexpress", "Alipress@gmail.com", "1234", null);
+        Company company = new Company(0, "Glikson Red Rental", "glikson@gmail.com", "1234", null);
         HttpEntity<Company> httpEntity = new HttpEntity<>(company, httpHeaders);
 
 
@@ -66,7 +66,7 @@ public class AdminTest implements CommandLineRunner {
         System.out.println("Add Company Test:");
         System.out.println(responseEntity.getStatusCode());
 
-        Company company2 = new Company(0, "ebay", "ebay@gmail.com", "1234", null);
+        Company company2 = new Company(0, "MDK", "mdk@gmail.com", "1234", null);
         HttpEntity<Company> httpEntity2 = new HttpEntity<>(company2, httpHeaders);
         ResponseEntity<Void> responseEntity2  = restTemplate.exchange(url + "company", HttpMethod.POST, httpEntity2, Void.class);
         System.out.println("Add Company 2 Test:");
@@ -78,7 +78,7 @@ public class AdminTest implements CommandLineRunner {
         httpHeaders.add("Authorization", token.toString());
 
 
-        Company company = new Company(1, "Aliexpress", "Alipress@gmail.com", "12345", null);
+        Company company = new Company(1, "Glikson Red Rental", "glikson@gmail.com", "12345", null);
         HttpEntity<Company> httpEntity = new HttpEntity<>(company, httpHeaders);
 
 
