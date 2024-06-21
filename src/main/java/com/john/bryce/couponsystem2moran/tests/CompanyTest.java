@@ -42,9 +42,9 @@ public class CompanyTest  implements CommandLineRunner {
         addCouponTest();
         updateCouponTest();
         deleteCouponTest();
-        getCouponsTest();
-        getCouponsByCategoryTest();
-        getCouponsByPriceTest();
+        getCompanyCouponsTest();
+        getCompanyCouponsByCategoryTest();
+        getCompanyCouponsByPriceTest();
     }
 
     private void loginTest() {
@@ -103,7 +103,7 @@ public class CompanyTest  implements CommandLineRunner {
     }
 
 
-    public void getCouponsTest() throws CouponSystemException {
+    public void getCompanyCouponsTest() throws CouponSystemException {
 //        To get token
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", token.toString());
@@ -115,7 +115,7 @@ public class CompanyTest  implements CommandLineRunner {
         System.out.println(responseEntity.getBody());
     }
 
-    public void getCouponsByCategoryTest() throws CouponSystemException {
+    public void getCompanyCouponsByCategoryTest() throws CouponSystemException {
 //        To get token
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", token.toString());
@@ -128,7 +128,7 @@ public class CompanyTest  implements CommandLineRunner {
         System.out.println("Get Coupon Test By Category:");
         System.out.println(responseEntity.getBody());
     }
-    public void getCouponsByPriceTest() throws CouponSystemException {
+    public void getCompanyCouponsByPriceTest() throws CouponSystemException {
 //        To get token
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", token.toString());

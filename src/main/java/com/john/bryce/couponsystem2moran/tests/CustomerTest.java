@@ -42,6 +42,8 @@ public class CustomerTest implements CommandLineRunner {
         loginTest();
         PurchaseCouponTest();
         getCustomerCoupons();
+        getCustomerCouponsByCategoryTest();
+        getCustomerCouponsByPrice();
 
     }
 
@@ -73,10 +75,35 @@ public class CustomerTest implements CommandLineRunner {
 
         HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
 
-        ResponseEntity<List<Customer>> responseEntity  = restTemplate.exchange(url + "coupons", HttpMethod.GET, httpEntity, new ParameterizedTypeReference<List<Customer>>() {});
-        System.out.println("Get Customers' coupons Test:");
+        ResponseEntity<List<Coupon>> responseEntity  = restTemplate.exchange(url + "coupons", HttpMethod.GET, httpEntity, new ParameterizedTypeReference<List<Coupon>>() {});
+        System.out.println("Get Customer coupons Test:");
         System.out.println(responseEntity.getBody());
     }
+
+    public void getCustomerCouponsByCategoryTest() throws CouponSystemException {
+        //     To get token
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", token.toString());
+
+        HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
+
+        ResponseEntity<List<Coupon>> responseEntity  = restTemplate.exchange(url + "coupons-by-category?category=RENTAL_GEAR", HttpMethod.GET, httpEntity, new ParameterizedTypeReference<List<Coupon>>() {});
+        System.out.println("Get Customer coupons by category Test:");
+        System.out.println(responseEntity.getBody());
+    }
+
+    public void getCustomerCouponsByPrice() throws CouponSystemException {
+        //     To get token
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", token.toString());
+
+        HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
+
+        ResponseEntity<List<Coupon>> responseEntity  = restTemplate.exchange(url + "coupons-by-max-price?maxPrice=8000", HttpMethod.GET, httpEntity, new ParameterizedTypeReference<List<Coupon>>() {});
+        System.out.println("Get Customer coupons by Max Price Test:");
+        System.out.println(responseEntity.getBody());
+    }
+
 }
 
 

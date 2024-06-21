@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -70,4 +71,18 @@ public interface CouponRepo extends JpaRepository<Coupon, Long> {
 
 
     //    Object findCouponById(long couponID);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM customer_coupons WHERE coupons_id IN (SELECT id FROM coupon WHERE end_date < CURDATE()) ", nativeQuery = true)
+    void deleteExpiredPurchasedCoupons();
+
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM coupon WHERE end_date < CURDATE()", nativeQuery = true)
+    void deleteExpiredCoupons();
+
+
+
 }
