@@ -45,6 +45,7 @@ public class CompanyTest  implements CommandLineRunner {
         getCompanyCouponsTest();
         getCompanyCouponsByCategoryTest();
         getCompanyCouponsByPriceTest();
+        getCompanyDetails();
     }
 
     private void loginTest() {
@@ -142,4 +143,17 @@ public class CompanyTest  implements CommandLineRunner {
         System.out.println(responseEntity.getBody());
     }
 
-}
+    public void getCompanyDetails() throws CouponSystemException {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", token.toString());
+
+        /// Body (Optional) + Token
+        HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
+
+        ResponseEntity<Company> responseEntity  = restTemplate.exchange(url + "company-details", HttpMethod.GET, httpEntity, Company.class );
+        System.out.println("Get company details test:");
+        System.out.println(responseEntity.getBody());
+    }
+
+
+    }

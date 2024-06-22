@@ -57,7 +57,7 @@ public class CompanyController {
     public List<Coupon> getCompanyCoupons(@RequestHeader("Authorization") UUID token, @RequestParam double maxPrice) throws CouponSystemException {
         return companyService.getCompanyCoupons(token,maxPrice);
     }
-    @GetMapping("/customer-details")
+    @GetMapping("/company-details")
     @ResponseStatus(HttpStatus.OK) // 200
     public Company getCompanyDetails(@RequestHeader("Authorization") UUID token) throws CouponSystemException {
         return companyService.getCompanyDetails(token);

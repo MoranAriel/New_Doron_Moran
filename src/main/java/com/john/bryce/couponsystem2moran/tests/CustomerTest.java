@@ -44,6 +44,7 @@ public class CustomerTest implements CommandLineRunner {
         getCustomerCoupons();
         getCustomerCouponsByCategoryTest();
         getCustomerCouponsByPrice();
+        getCompanyDetails();
 
     }
 
@@ -101,6 +102,18 @@ public class CustomerTest implements CommandLineRunner {
 
         ResponseEntity<List<Coupon>> responseEntity  = restTemplate.exchange(url + "coupons-by-max-price?maxPrice=8000", HttpMethod.GET, httpEntity, new ParameterizedTypeReference<List<Coupon>>() {});
         System.out.println("Get Customer coupons by Max Price Test:");
+        System.out.println(responseEntity.getBody());
+    }
+
+    public void getCompanyDetails() throws CouponSystemException {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", token.toString());
+
+        /// Body (Optional) + Token
+        HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
+
+        ResponseEntity<Customer> responseEntity  = restTemplate.exchange(url + "customer-details", HttpMethod.GET, httpEntity, Customer.class );
+        System.out.println("Get customer details test:");
         System.out.println(responseEntity.getBody());
     }
 
