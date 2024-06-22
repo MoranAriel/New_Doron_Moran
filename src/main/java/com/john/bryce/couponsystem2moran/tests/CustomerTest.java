@@ -26,7 +26,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Component
-@Order(3)
+@Order(4)
 @RequiredArgsConstructor
 public class CustomerTest implements CommandLineRunner {
 
@@ -46,6 +46,7 @@ public class CustomerTest implements CommandLineRunner {
         getCustomerCouponsByPrice();
         getCompanyDetails();
 
+
     }
 
 
@@ -64,7 +65,7 @@ public class CustomerTest implements CommandLineRunner {
         httpHeaders.add("Authorization", token.toString());
 
         HttpEntity<Coupon> httpEntity = new HttpEntity<>(httpHeaders);
-        ResponseEntity<Void> responseEntity  = restTemplate.exchange(url + "coupon/1", HttpMethod.POST, httpEntity, Void.class);
+        ResponseEntity<Void> responseEntity  = restTemplate.exchange(url + "coupon/5", HttpMethod.POST, httpEntity, Void.class);
         System.out.println("Purchase Coupon Test:");
         System.out.println(responseEntity.getStatusCode());
     }

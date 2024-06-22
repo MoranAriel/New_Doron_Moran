@@ -26,7 +26,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Component
-@Order(2)
+@Order(3)
 @RequiredArgsConstructor
 public class CompanyTest  implements CommandLineRunner {
 
@@ -82,7 +82,7 @@ public class CompanyTest  implements CommandLineRunner {
         httpHeaders.add("Authorization", token.toString());
 
 
-     Coupon coupon = new Coupon(1, null, Category.RENTAL_GEAR,"60% off","extra 60% off weekend rentals", LocalDate.of(2024,6,1),LocalDate.of(2024,7,31),10,100,null);
+     Coupon coupon = new Coupon(5, null, Category.RENTAL_GEAR,"60% off","extra 60% off weekend rentals", LocalDate.of(2024,6,1),LocalDate.of(2024,7,31),10,100,null);
         HttpEntity<Coupon> httpEntity = new HttpEntity<>(coupon, httpHeaders);
         ResponseEntity<Void> responseEntity  = restTemplate.exchange(url + "coupon", HttpMethod.PUT, httpEntity, Void.class);
         System.out.println("Update Coupon Test:");
@@ -98,7 +98,7 @@ public class CompanyTest  implements CommandLineRunner {
         HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
 
 
-        ResponseEntity<Void> responseEntity  = restTemplate.exchange(url + "coupon/2", HttpMethod.DELETE, httpEntity, Void.class);
+        ResponseEntity<Void> responseEntity  = restTemplate.exchange(url + "coupon/6", HttpMethod.DELETE, httpEntity, Void.class);
         System.out.println("Delete Coupon Test:");
         System.out.println(responseEntity.getStatusCode());
     }

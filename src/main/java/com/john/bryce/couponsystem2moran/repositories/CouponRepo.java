@@ -29,6 +29,7 @@ public interface CouponRepo extends JpaRepository<Coupon, Long> {
     void deletePurchasedCouponsByCustomerId(long customerId);
 
 
+    @Transactional
     @Modifying
     @Query(value = "INSERT INTO `customer_coupons` VALUES (?, ?)", nativeQuery = true)
     void purchaseCoupon(long customerId, long couponId);

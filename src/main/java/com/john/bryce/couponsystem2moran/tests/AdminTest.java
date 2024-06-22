@@ -26,7 +26,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Component
-@Order(1)
+@Order(2)
 @RequiredArgsConstructor
 public class AdminTest implements CommandLineRunner {
 
@@ -67,7 +67,7 @@ public class AdminTest implements CommandLineRunner {
         httpHeaders.add("Authorization", token.toString());
 
 
-        Company company = new Company(0, "Glikson Red Rental", "glikson@gmail.com", "1234", null);
+        Company company = new Company(3, "Glikson Red Rental", "glikson@gmail.com", "1234", null);
         HttpEntity<Company> httpEntity = new HttpEntity<>(company, httpHeaders);
 
 
@@ -75,7 +75,7 @@ public class AdminTest implements CommandLineRunner {
         System.out.println("Add Company Test:");
         System.out.println(responseEntity.getStatusCode());
 
-        Company company2 = new Company(0, "MDK", "mdk@gmail.com", "1234", null);
+        Company company2 = new Company(4, "MDK", "mdk@gmail.com", "1234", null);
         HttpEntity<Company> httpEntity2 = new HttpEntity<>(company2, httpHeaders);
         ResponseEntity<Void> responseEntity2  = restTemplate.exchange(url + "company", HttpMethod.POST, httpEntity2, Void.class);
         System.out.println("Add Company 2 Test:");
@@ -87,7 +87,7 @@ public class AdminTest implements CommandLineRunner {
         httpHeaders.add("Authorization", token.toString());
 
 
-        Company company = new Company(1, "Glikson Red Rental", "glikson@gmail.com", "12345", null);
+        Company company = new Company(3, "Glikson Red Rental", "glikson@gmail.com", "12345", null);
         HttpEntity<Company> httpEntity = new HttpEntity<>(company, httpHeaders);
 
 
@@ -105,7 +105,7 @@ public class AdminTest implements CommandLineRunner {
         HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
 
 
-        ResponseEntity<Void> responseEntity  = restTemplate.exchange(url + "company/2", HttpMethod.DELETE, httpEntity, Void.class);
+        ResponseEntity<Void> responseEntity  = restTemplate.exchange(url + "company/4", HttpMethod.DELETE, httpEntity, Void.class);
         System.out.println("Delete Company Test:");
         System.out.println(responseEntity.getStatusCode());
     }
@@ -132,7 +132,7 @@ public class AdminTest implements CommandLineRunner {
         HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
 
 
-        ResponseEntity<Company> responseEntity  = restTemplate.exchange(url + "company/1", HttpMethod.GET, httpEntity, Company.class );
+        ResponseEntity<Company> responseEntity  = restTemplate.exchange(url + "company/3", HttpMethod.GET, httpEntity, Company.class );
         System.out.println("Get Company Test:");
         System.out.println(responseEntity.getBody());
     }
@@ -162,7 +162,7 @@ public class AdminTest implements CommandLineRunner {
         httpHeaders.add("Authorization", token.toString());
 
 
-        Customer customer = new Customer(1, "Moran", "Ariel Kuzi", "moran@gmail.com", "12345", null);
+        Customer customer = new Customer(3, "Moran", "Ariel Kuzi", "moran@gmail.com", "12345", null);
         HttpEntity<Customer> httpEntity = new HttpEntity<>(customer, httpHeaders);
 
 
@@ -179,7 +179,7 @@ public class AdminTest implements CommandLineRunner {
         HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
 
 
-        ResponseEntity<Void> responseEntity  = restTemplate.exchange(url + "customer/2", HttpMethod.DELETE, httpEntity, Void.class);
+        ResponseEntity<Void> responseEntity  = restTemplate.exchange(url + "customer/4", HttpMethod.DELETE, httpEntity, Void.class);
         System.out.println("Delete Customer Test:");
         System.out.println(responseEntity.getStatusCode());
     }
@@ -207,7 +207,7 @@ public class AdminTest implements CommandLineRunner {
         HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
 
 
-        ResponseEntity<Customer> responseEntity  = restTemplate.exchange(url + "customer/1", HttpMethod.GET, httpEntity, Customer.class );
+        ResponseEntity<Customer> responseEntity  = restTemplate.exchange(url + "customer/3", HttpMethod.GET, httpEntity, Customer.class );
         System.out.println("Get Customer Test:");
         System.out.println(responseEntity.getBody());
     }

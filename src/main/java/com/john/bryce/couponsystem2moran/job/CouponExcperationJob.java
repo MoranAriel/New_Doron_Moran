@@ -15,7 +15,7 @@ public class CouponExcperationJob extends Thread{
 
 
 
-        @Scheduled(timeUnit = TimeUnit.HOURS, fixedRate = 24)
+        @Scheduled(fixedRate = 1000 * 60 * 60 * 24, initialDelay = 1000 * 60)
         public void deleteCouponsExpired(){
             couponRepo.deleteExpiredPurchasedCoupons();
             couponRepo.deleteExpiredCoupons();
