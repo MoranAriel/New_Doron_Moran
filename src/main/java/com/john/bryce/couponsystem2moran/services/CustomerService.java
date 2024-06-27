@@ -32,15 +32,15 @@ public class CustomerService extends ClientService{
         Coupon couponFromDb = couponRepo.findById(couponId).orElseThrow(() -> new CouponSystemException("Coupon not found"));
 
         if(couponFromDb.getAmount() <= 0) {
-            throw new CouponSystemException("coupon out of stock");
+            throw new CouponSystemException("Coupon out of stock");
         }
 
         if(couponFromDb.getEndDate().isBefore(LocalDate.now())) {
-            throw new CouponSystemException("coupon is expired");
+            throw new CouponSystemException("Coupon is expired");
         }
 
         if(couponRepo.isCouponPurchasedBefore(customerId, couponId) == 1) {
-            throw new CouponSystemException("coupon is already purchase before");
+            throw new CouponSystemException("Coupon has already been purchased before");
         }
 
         couponFromDb.setAmount(couponFromDb.getAmount() - 1);

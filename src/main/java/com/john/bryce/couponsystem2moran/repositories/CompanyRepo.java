@@ -17,6 +17,5 @@ public interface CompanyRepo extends JpaRepository<Company, Long> {
 
     boolean existsByName(String name);
 
-
     boolean existsByEmail(String email);
 }

@@ -40,7 +40,7 @@ public class TokenManager {
         }
 
         if (tokenInformation.getClientType() != clientType) {
-            throw new CouponSystemException("unauthorized action");
+            throw new CouponSystemException("Unauthorized action");
         }
         tokenInformation.setExpiration(LocalDateTime.now().plusDays(1));
         return tokenInformation.getId();

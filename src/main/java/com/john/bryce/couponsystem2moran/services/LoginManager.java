@@ -31,7 +31,7 @@ public class LoginManager {
                 break;
             }
             default: {
-                throw new CouponSystemException("Invlaid Client Type");
+                throw new CouponSystemException("Invalid Client Type");
             }
         }
         return loginResponse;

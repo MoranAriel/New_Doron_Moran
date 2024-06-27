@@ -78,7 +78,7 @@ public class CompanyService extends ClientService {
         return couponRepo.getCompanyCoupons(companyId);
     }
 
-//    Category is @RequesParam
+
     public List<Coupon> getCompanyCoupons(UUID token, Category category) throws CouponSystemException {
         long companyId = tokenManager.validateToken(token, ClientType.COMPANY);
 

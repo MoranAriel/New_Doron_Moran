@@ -6,12 +6,14 @@ import com.john.bryce.couponsystem2moran.entities.Customer;
 import com.john.bryce.couponsystem2moran.exceptions.CouponSystemException;
 import com.john.bryce.couponsystem2moran.services.AdminService;
 import com.john.bryce.couponsystem2moran.services.CustomerService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+
 
 @RestController
 @RequestMapping("api/customer")

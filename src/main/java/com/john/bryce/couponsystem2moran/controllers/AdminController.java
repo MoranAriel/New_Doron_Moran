@@ -18,30 +18,6 @@ public class AdminController {
 
     private final AdminService adminService;
 
-/*
-Rest Controller aka controller made with rest architecture that is a standard which include verbs / http protocol etc
-
-    Verbs:
-    Post (@PostMapping) - add
-    Get (@GetMapping) - get
-    Delete (@DeleteMapping) - remove
-    Put (@PutMapping) - update
-    each method (endpoint) should have it's verb type
-
-
-    Get information from the user (to transfer data to the endpoint)
-    @RequestHeader - token
-    @RequestBody - object
-    @PathVariable - id (make sure to add also to the url path)
-    @RequestParam - email/age/name etc
-
-    Reponse Status
-
-    200 - 299 good
-    400 - 499 bad client
-    500 - 599 bad server
- */
-
     // http://localhost:8080/api/admin/company
     @PostMapping("/company")
     @ResponseStatus(HttpStatus.CREATED) // 201

@@ -49,7 +49,6 @@ public interface CouponRepo extends JpaRepository<Coupon, Long> {
 
 
 
-
     void deleteByCompanyId(long companyId);
 
     @Query(value = "SELECT * FROM coupon WHERE company_id = ?", nativeQuery = true)

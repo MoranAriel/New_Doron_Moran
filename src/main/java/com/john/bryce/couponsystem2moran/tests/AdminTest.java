@@ -1,6 +1,7 @@
 package com.john.bryce.couponsystem2moran.tests;
 
 import com.john.bryce.couponsystem2moran.entities.Company;
+import com.john.bryce.couponsystem2moran.entities.Coupon;
 import com.john.bryce.couponsystem2moran.entities.Customer;
 import com.john.bryce.couponsystem2moran.exceptions.CouponSystemException;
 import com.john.bryce.couponsystem2moran.security.ClientType;
@@ -66,11 +67,9 @@ public class AdminTest implements CommandLineRunner {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", token.toString());
 
-
         Company company = new Company(3, "Glikson Red Rental", "glikson@gmail.com", "1234", null);
         HttpEntity<Company> httpEntity = new HttpEntity<>(company, httpHeaders);
-
-
+        
         ResponseEntity<Void> responseEntity  = restTemplate.exchange(url + "company", HttpMethod.POST, httpEntity, Void.class);
         System.out.println("Add Company Test:");
         System.out.println(responseEntity.getStatusCode());
