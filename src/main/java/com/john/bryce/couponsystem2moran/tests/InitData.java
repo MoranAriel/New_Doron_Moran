@@ -33,7 +33,6 @@ public class InitData implements CommandLineRunner {
         initCoupons();
         initCustomers();
         initPurchases();
-
     }
 
     public void initCompanies () {
@@ -46,10 +45,10 @@ public class InitData implements CommandLineRunner {
         Company company1 = new Company(1, "Company1", "company1@gmail.com", "1234", null);
         Company company2 = new Company(2, "Company2", "company2@gmail.com", "1234", null);
 
-        Coupon coupon1 = new Coupon(0,company1, Category.RENTAL_GEAR,"Coupon1","Coupon1 desc", LocalDate.of(2024,6,1),LocalDate.of(2024,6,30),10,100,null);
-        Coupon coupon2 = new Coupon(0,company1, Category.NEW_GEAR,"Coupon2","Coupon2 desc", LocalDate.of(2023,6,1),LocalDate.of(2023,7,31),10,100,null);
-        Coupon coupon3 = new Coupon(0,company2, Category.PRODUCTION,"Coupon3","Coupon3 desc", LocalDate.of(2024,6,1),LocalDate.of(2024,6,30),10,100,null);
-        Coupon coupon4 = new Coupon(0,company2, Category.POST_PRODUCTION,"Coupon4","Coupon4 desc", LocalDate.of(2024,6,1),LocalDate.of(2024,7,31),10,100,null);
+        Coupon coupon1 = new Coupon(0,company1, Category.RENTAL_GEAR,"Coupon1","Coupon1 desc", LocalDate.of(2024,6,1),LocalDate.of(2025,6,30),10,100,"https://biggardenfurniture.com.au/wp-content/uploads/2018/08/img-placeholder.png");
+        Coupon coupon2 = new Coupon(0,company1, Category.NEW_GEAR,"Coupon2","Coupon2 desc", LocalDate.of(2023,6,1),LocalDate.of(2023,7,31),10,100,"https://biggardenfurniture.com.au/wp-content/uploads/2018/08/img-placeholder.png");
+        Coupon coupon3 = new Coupon(0,company2, Category.PRODUCTION,"Coupon3","Coupon3 desc", LocalDate.of(2024,6,1),LocalDate.of(2025,6,30),10,100,"https://biggardenfurniture.com.au/wp-content/uploads/2018/08/img-placeholder.png");
+        Coupon coupon4 = new Coupon(0,company2, Category.POST_PRODUCTION,"Coupon4","Coupon4 desc", LocalDate.of(2024,6,1),LocalDate.of(2025,7,31),10,100,"https://biggardenfurniture.com.au/wp-content/uploads/2018/08/img-placeholder.png");
         couponRepo.saveAll(List.of(coupon1, coupon2, coupon3, coupon4));
     }
 
@@ -62,10 +61,7 @@ public class InitData implements CommandLineRunner {
 
     public void initPurchases () {
         couponRepo.purchaseCoupon(1, 1);
-        couponRepo.purchaseCoupon(1, 2);
         couponRepo.purchaseCoupon(2, 2);
-        couponRepo.purchaseCoupon(2, 3);
-        couponRepo.purchaseCoupon(2, 4);
     }
 
 

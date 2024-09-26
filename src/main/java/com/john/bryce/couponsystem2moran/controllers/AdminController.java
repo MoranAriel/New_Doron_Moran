@@ -14,6 +14,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("api/admin")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class AdminController {
 
     private final AdminService adminService;
@@ -21,8 +22,8 @@ public class AdminController {
     // http://localhost:8080/api/admin/company
     @PostMapping("/company")
     @ResponseStatus(HttpStatus.CREATED) // 201
-    public void addCompany(@RequestHeader("Authorization") UUID token, @RequestBody Company company) throws CouponSystemException {
-        adminService.addCompany(token, company);
+    public Company addCompany(@RequestHeader("Authorization") UUID token, @RequestBody Company company) throws CouponSystemException {
+        return adminService.addCompany(token, company);
     }
 
     @PutMapping("/company")
@@ -54,8 +55,8 @@ public class AdminController {
 
     @PostMapping("/customer")
     @ResponseStatus(HttpStatus.CREATED) // 201
-    public void addCustomer(@RequestHeader("Authorization") UUID token, @RequestBody Customer customer) throws CouponSystemException {
-        adminService.addCustomer(token, customer);
+    public Customer addCustomer(@RequestHeader("Authorization") UUID token, @RequestBody Customer customer) throws CouponSystemException {
+       return adminService.addCustomer(token, customer);
     }
 
     @PutMapping("/customer")

@@ -1,5 +1,6 @@
 package com.john.bryce.couponsystem2moran.job;
 
+import com.john.bryce.couponsystem2moran.entities.Coupon;
 import com.john.bryce.couponsystem2moran.repositories.CouponRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;

@@ -18,10 +18,11 @@ import java.util.UUID;
 @RestController
 @RequestMapping("api/customer")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class CustomerController {
     private final CustomerService customerService;
 
-    @PostMapping("/coupon/{couponId}")
+    @PostMapping("/purchase/{couponId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void PurchaseCoupon(@RequestHeader("Authorization") UUID token, @PathVariable long couponId) throws CouponSystemException {
         customerService.PurchaseCoupon(token, couponId);
@@ -52,5 +53,10 @@ public class CustomerController {
         return customerService.getCustomerDetails(token);
     }
 
+    @GetMapping("/all-non-purchased-coupons")
+    @ResponseStatus(HttpStatus.OK) // 200
+    public List<Coupon> getAllNonPurchesedCoupons(@RequestHeader("Authorization") UUID token) throws CouponSystemException {
+        return customerService.getAllNonPurchesedCoupons(token);
+    }
 
 }

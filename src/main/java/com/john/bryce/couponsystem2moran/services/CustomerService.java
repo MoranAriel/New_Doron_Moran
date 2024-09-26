@@ -8,8 +8,12 @@ import com.john.bryce.couponsystem2moran.exceptions.CouponSystemException;
 import com.john.bryce.couponsystem2moran.security.ClientType;
 import com.john.bryce.couponsystem2moran.security.LoginResponse;
 import com.john.bryce.couponsystem2moran.security.TokenInformation;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -45,7 +49,7 @@ public class CustomerService extends ClientService{
 
         couponFromDb.setAmount(couponFromDb.getAmount() - 1);
         couponRepo.save(couponFromDb);
-        couponRepo.purchaseCoupon(customerId, couponId);
+        couponRepo.purchaseCoupon(couponId, customerId);
     }
 
 
@@ -67,7 +71,6 @@ public class CustomerService extends ClientService{
             throw new CouponSystemException("Customer does not exist");
         }
         return couponRepo.findByCustomerIdAndCategory(customerId, category.name());
-
     }
 
     public List<Coupon> getCustomerCoupons(UUID token, double maxPrice) throws CouponSystemException {
@@ -88,5 +91,10 @@ public class CustomerService extends ClientService{
         return customerRepo.findById(customerId).orElseThrow(() -> new CouponSystemException("Customer does not exist"));
     }
 
+
+    public List<Coupon> getAllNonPurchesedCoupons(UUID token) throws CouponSystemException {
+        long customerId = tokenManager.validateToken(token, ClientType.CUSTOMER);
+      return couponRepo.findAllCouponsNotPurchasedByCustomer(customerId);
+    }
 }
 

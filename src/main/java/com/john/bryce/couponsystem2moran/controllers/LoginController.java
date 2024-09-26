@@ -5,14 +5,12 @@ import com.john.bryce.couponsystem2moran.security.LoginRequest;
 import com.john.bryce.couponsystem2moran.security.LoginResponse;
 import com.john.bryce.couponsystem2moran.services.LoginManager;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/login")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class LoginController {
     private final LoginManager loginManager;
 

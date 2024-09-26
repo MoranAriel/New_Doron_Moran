@@ -32,7 +32,7 @@ public interface CouponRepo extends JpaRepository<Coupon, Long> {
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO `customer_coupons` VALUES (?, ?)", nativeQuery = true)
-    void purchaseCoupon(long customerId, long couponId);
+    void purchaseCoupon(long couponId, long customerId);
 
     @Query(value = "SELECT EXISTS (SELECT * FROM customer_coupons WHERE customer_id = ? AND coupons_id = ? ) AS res;", nativeQuery = true)
     int isCouponPurchasedBefore(long customer_id, long coupons_id);
@@ -74,15 +74,22 @@ public interface CouponRepo extends JpaRepository<Coupon, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM customer_coupons WHERE coupons_id IN (SELECT id FROM coupon WHERE end_date < CURDATE()) ", nativeQuery = true)
+    @Query(value = "DELETE FROM  `coupon-system2-moran`.customer_coupons WHERE coupons_id IN (SELECT id FROM `coupon-system2-moran`.coupon WHERE end_date < CURDATE()) ", nativeQuery = true)
     void deleteExpiredPurchasedCoupons();
 
+    @Query(value = "SELECT DISTINCT c.* FROM `coupon-system2-moran`.coupon c " +
+            "LEFT JOIN `coupon-system2-moran`.customer_coupons cc " +
+            "ON c.id = cc.coupons_id AND cc.customer_id = ?1 " +
+            "WHERE cc.coupons_id IS NULL", nativeQuery = true)
+    List<Coupon> findAllCouponsNotPurchasedByCustomer(long customerId);
 
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM coupon WHERE end_date < CURDATE()", nativeQuery = true)
+    @Query(value = "DELETE FROM `coupon-system2-moran`.coupon WHERE end_date < CURDATE()", nativeQuery = true)
     void deleteExpiredCoupons();
 
+    @Query(value = "SELECT * FROM coupon WHERE end_date < CURDATE()", nativeQuery = true)
+    List<Coupon> getAllExpiredCoupons();
 
 
 }

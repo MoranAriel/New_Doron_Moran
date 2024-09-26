@@ -16,6 +16,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("api/company")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class CompanyController {
     private final CompanyService companyService;
 
@@ -23,14 +24,14 @@ public class CompanyController {
 
     @PostMapping("/coupon")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addCoupon(@RequestHeader("Authorization") UUID token, @RequestBody Coupon coupon) throws CouponSystemException {
-        companyService.addCoupon(token, coupon);
+    public Coupon addCoupon(@RequestHeader("Authorization") UUID token, @RequestBody Coupon coupon) throws CouponSystemException {
+        return companyService.addCoupon(token, coupon);
     }
 
     @PutMapping("/coupon")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateCoupon(@RequestHeader("Authorization") UUID token,  @RequestBody Coupon coupon) throws CouponSystemException {
-        companyService.updateCoupon(token, coupon);
+    public Coupon updateCoupon(@RequestHeader("Authorization") UUID token,  @RequestBody Coupon coupon) throws CouponSystemException {
+       return companyService.updateCoupon(token, coupon);
     }
 
     @DeleteMapping("/coupon/{couponId}")

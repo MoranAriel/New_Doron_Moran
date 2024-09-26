@@ -20,7 +20,7 @@ public class AdminService extends ClientService {
 
 
     @Override
-    public LoginResponse login(String email, String password) throws CouponSystemException {
+    public LoginResponse  login(String email, String password) throws CouponSystemException {
         if (!email.equalsIgnoreCase("admin@admin.com") || !password.equals("admin")) {
             throw new CouponSystemException("Email or password is wrong");
         }
@@ -30,7 +30,7 @@ public class AdminService extends ClientService {
     }
 
     @Transactional
-    public void addCompany(UUID token, Company company) throws CouponSystemException {
+    public Company addCompany(UUID token, Company company) throws CouponSystemException {
         tokenManager.validateToken(token, ClientType.ADMIN);
 
         if (companyRepo.existsByName(company.getName())) {
@@ -41,7 +41,7 @@ public class AdminService extends ClientService {
             throw new CouponSystemException("Company email already exists");
         }
 
-        companyRepo.save(company);
+        return companyRepo.save(company);
     }
 
     @Transactional
@@ -82,12 +82,12 @@ public class AdminService extends ClientService {
     }
 
     @Transactional
-    public void addCustomer(UUID token, Customer customer) throws CouponSystemException {
+    public Customer addCustomer(UUID token, Customer customer) throws CouponSystemException {
         tokenManager.validateToken(token, ClientType.ADMIN);
         if (customerRepo.existsByEmail(customer.getEmail())) {
             throw new CouponSystemException("Customer email already exist");
         }
-        customerRepo.save(customer);
+       return customerRepo.save(customer);
     }
 
 

@@ -32,19 +32,19 @@ public class CompanyService extends ClientService {
     }
 
     @Transactional
-    public void addCoupon(UUID token, Coupon coupon) throws CouponSystemException {
+    public Coupon addCoupon(UUID token, Coupon coupon) throws CouponSystemException {
         long companyId = tokenManager.validateToken(token, ClientType.COMPANY);
         Company companyFromDb = companyRepo.findById(companyId).orElseThrow(() -> new CouponSystemException("Company does not exist"));
         if (couponRepo.existsByTitleAndCompanyId(coupon.getTitle(), companyId)) {
             throw new CouponSystemException("Coupon title already exists");
         }
         coupon.setCompany(companyFromDb);
-        couponRepo.save(coupon);
+        return couponRepo.save(coupon);
     }
 
 
     @Transactional
-    public void updateCoupon(UUID token, Coupon coupon) throws CouponSystemException {
+    public Coupon updateCoupon(UUID token, Coupon coupon) throws CouponSystemException {
         long companyId = tokenManager.validateToken(token, ClientType.COMPANY);
         Company companyFromDb = companyRepo.findById(companyId).orElseThrow(() -> new CouponSystemException("Company does not exist"));
 
@@ -55,7 +55,7 @@ public class CompanyService extends ClientService {
             throw new CouponSystemException("Coupon title already exists");
         }
         coupon.setCompany(companyFromDb);
-        couponRepo.saveAndFlush(coupon);
+        return couponRepo.saveAndFlush(coupon);
     }
 
     @Transactional

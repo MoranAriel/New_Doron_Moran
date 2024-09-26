@@ -26,7 +26,4 @@ public class Company {
     @JsonIgnore
     @Singular
     private List<Coupon> coupons;
-
-
-
 }
